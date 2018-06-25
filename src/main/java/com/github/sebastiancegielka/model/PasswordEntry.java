@@ -1,12 +1,10 @@
 package com.github.sebastiancegielka.model;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.UUID;
 
 @Entity
 public class PasswordEntry {
@@ -14,9 +12,15 @@ public class PasswordEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String uuid = UUID.randomUUID().toString();
     private String website;
     private String login;
+    @Lob
     private char[] password;
+    @OneToOne(mappedBy = "entry",
+            cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
+            orphanRemoval = true)
+    private SecretKey secretKey;
 
     public PasswordEntry() {
     }
@@ -45,8 +49,24 @@ public class PasswordEntry {
         return sb.toString();
     }
 
-    public void setPassword(char[] password) {
-        this.password = password;
+    public void setPassword(String pass) {
+        this.password = pass.toCharArray();
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public SecretKey getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(SecretKey secretKey) {
+        this.secretKey = secretKey;
     }
 
     @Override
