@@ -35,7 +35,7 @@ public class App {
     private ApiInfo apiInfo(){
         return new ApiInfoBuilder()
                 .title("Password manager Spring REST API")
-                .description("Own project of web password manager")
+                .description("Own project of web password manager with Spring")
                 .contact("Sebastian Cegielka")
                 .version("2.0")
                 .build();
