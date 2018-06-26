@@ -2,6 +2,7 @@ package com.github.sebastiancegielka.mapper;
 
 import com.github.sebastiancegielka.dto.PasswordEntryCreateDTO;
 import com.github.sebastiancegielka.dto.PasswordEntryDTO;
+import com.github.sebastiancegielka.dto.PasswordEntryFindAllDTO;
 import com.github.sebastiancegielka.model.PasswordEntry;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
@@ -10,6 +11,7 @@ import org.mapstruct.ReportingPolicy;
 public interface PasswordEntryMapper {
     PasswordEntryDTO toEntryDTO(PasswordEntry entry);
 
-
     PasswordEntry toEntry(PasswordEntryCreateDTO createEntry);
+
+    PasswordEntryFindAllDTO toEntryFindAllDTO(PasswordEntry entry);
 }

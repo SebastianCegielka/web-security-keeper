@@ -20,7 +20,7 @@ public class PasswordEntry {
     @OneToOne(mappedBy = "entry",
             cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REMOVE},
             orphanRemoval = true)
-    private SecretKey secretKey;
+    private EncodingKey encodingKey;
 
     public PasswordEntry() {
     }
@@ -61,12 +61,12 @@ public class PasswordEntry {
         return id;
     }
 
-    public SecretKey getSecretKey() {
-        return secretKey;
+    public EncodingKey getEncodingKey() {
+        return encodingKey;
     }
 
-    public void setSecretKey(SecretKey secretKey) {
-        this.secretKey = secretKey;
+    public void setEncodingKey(EncodingKey encodingKey) {
+        this.encodingKey = encodingKey;
     }
 
     @Override

@@ -1,25 +1,27 @@
 package com.github.sebastiancegielka.model;
 
+import javax.crypto.SecretKey;
 import javax.persistence.*;
 
 @Entity
-public class SecretKey {
+public class EncodingKey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String secretKey;
+    @Lob
+    private SecretKey secretKey;
     @OneToOne
     private PasswordEntry entry;
 
-    public SecretKey() {
+    public EncodingKey() {
     }
 
-    public String getSecretKey() {
+    public SecretKey getSecretKey() {
         return secretKey;
     }
 
-    public void setSecretKey(String secretKey) {
+    public void setSecretKey(SecretKey secretKey) {
         this.secretKey = secretKey;
     }
 
