@@ -10,6 +10,9 @@ import org.apache.commons.text.RandomStringGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.crypto.KeyGenerator;
+import javax.crypto.SecretKey;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,12 +63,18 @@ public class PasswordUtility {
     }
 
     public PasswordEntry decryptPassword(PasswordEntry entry){
-        String pass = passwordSecurity.decrypt(entry.getPassword(), entry.getSecretKey().getSecretKey());
+        String pass = passwordSecurity.decrypt(entry.getPassword(), entry.getEncodingKey().getSecretKey());
         entry.setPassword(pass);
         return entry;
     }
 
-    public String encryptPassword(String password, String key){
+    public String encryptPassword(String password, SecretKey key){
         return passwordSecurity.encrypt(password, key);
+    }
+
+    public SecretKey generateKey() throws NoSuchAlgorithmException {
+        KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
+        keyGenerator.init(128);
+        return keyGenerator.generateKey();
     }
 }
