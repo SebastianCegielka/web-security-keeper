@@ -4,15 +4,13 @@ package com.github.sebastiancegielka.model;
 import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.UUID;
 
 @Entity
-public class PasswordEntry {
+public class PasswordEntry extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String uuid = UUID.randomUUID().toString();
     private String website;
     private String login;
     @Lob
@@ -53,9 +51,6 @@ public class PasswordEntry {
         this.password = pass.toCharArray();
     }
 
-    public String getUuid() {
-        return uuid;
-    }
 
     public Long getId() {
         return id;
@@ -85,15 +80,5 @@ public class PasswordEntry {
         int result = Objects.hash(website, login);
         result = 31 * result + Arrays.hashCode(password);
         return result;
-    }
-
-    @Override
-    public String toString() {
-        return "PasswordEntry{" +
-                "id=" + id +
-                ", website='" + website + '\'' +
-                ", login='" + login + '\'' +
-                ", password=" + Arrays.toString(password) +
-                '}';
     }
 }
