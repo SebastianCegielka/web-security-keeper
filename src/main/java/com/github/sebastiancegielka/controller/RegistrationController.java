@@ -17,4 +17,5 @@ public class RegistrationController {
         model.addAttribute("user", userDTO);
         return "registration";
     }
+
 }
